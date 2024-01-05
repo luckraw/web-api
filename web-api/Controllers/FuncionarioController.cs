@@ -26,9 +26,9 @@ namespace web_api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<FuncionarioModel>>> GetFuncionarioById(int id)
         {
-            ServiceResponse<FuncionarioModel> responseResponse = await _funcionarioInterface.GetFuncionarioById(id);
+            ServiceResponse<FuncionarioModel> serviceResponse = await _funcionarioInterface.GetFuncionarioById(id);
 
-            return Ok(responseResponse);
+            return Ok(serviceResponse);
         }
 
 
@@ -36,6 +36,23 @@ namespace web_api.Controllers
         public async Task<ActionResult<ServiceResponse<List<FuncionarioModel>>>> CreateFuncionario(FuncionarioModel novoFuncionario)
         {
             return Ok(await _funcionarioInterface.CreateFuncionario(novoFuncionario));
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<List<FuncionarioModel>>>> UpdateFuncionario(FuncionarioModel editadoFuncionario)
+        {
+            ServiceResponse<List<FuncionarioModel>> serviceResponse = await _funcionarioInterface.UpdateFuncionario(editadoFuncionario);
+
+            return Ok(serviceResponse);
+        }
+
+
+        [HttpPut("inativaFuncionario")]
+        public async Task<ActionResult<ServiceResponse<List<FuncionarioModel>>>> InativaFuncionario(int id)
+        {
+            ServiceResponse<List<FuncionarioModel>> serviceResponse = await _funcionarioInterface.InativaFuncionario(id);
+
+            return Ok(serviceResponse);
         }
     }
 }
