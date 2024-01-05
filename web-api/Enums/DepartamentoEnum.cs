@@ -1,5 +1,8 @@
-﻿namespace web_api.Enums
+﻿using System.Text.Json.Serialization;
+
+namespace web_api.Enums
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum DepartamentoEnum
     {
         RH,
