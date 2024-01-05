@@ -5,6 +5,7 @@ Este é um projeto de API desenvolvido em C# utilizando ASP.NET, Entity Framewor
 # Tecnologias Utilizadas
 
 - C# ASP.NET
+- .NET 8.0
 - Entity Framework
 - SQLite
 - Repository Pattern
