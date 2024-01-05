@@ -23,6 +23,13 @@ namespace web_api.Controllers
 
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ServiceResponse<FuncionarioModel>>> GetFuncionarioById(int id)
+        {
+            return Ok(await _funcionarioInterface.GetFuncionarioById(id));
+        }
+
+
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<List<FuncionarioModel>>>> CreateFuncionario(FuncionarioModel novoFuncionario)
         {

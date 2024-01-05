@@ -26,6 +26,10 @@ namespace web_api.Service.FuncionarioService
                     return serviceResponse;
                 }
 
+                novoFuncionario.DataDeCriacao = DateTime.Now.ToLocalTime();
+                novoFuncionario.DataDeAlteracao = DateTime.Now.ToLocalTime();
+
+
                 _context.Add(novoFuncionario);
                 await _context.SaveChangesAsync();
 
@@ -45,9 +49,30 @@ namespace web_api.Service.FuncionarioService
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceResponse<FuncionarioModel>> GetFuncionario(int id)
+        public async Task<ServiceResponse<FuncionarioModel>> GetFuncionarioById(int id)
         {
-            return null;
+            ServiceResponse<FuncionarioModel> serviceResponse = new ServiceResponse<FuncionarioModel>();
+
+            try
+            {
+                FuncionarioModel funcionario = _context.Funcionarios.FirstOrDefault(x => x.Id == id);
+
+                if (funcionario == null)
+                {
+                    serviceResponse.Dados = null;
+                    serviceResponse.Mensagem = "Funcionário não encontrado.";
+                    return serviceResponse;
+                }
+
+                serviceResponse.Dados = funcionario;
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Mensagem = ex.Message;
+                serviceResponse.Sucesso = false;
+            }
+
+            return serviceResponse;
         }
 
         public async Task<ServiceResponse<List<FuncionarioModel>>> GetFuncionarios()
