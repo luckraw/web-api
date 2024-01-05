@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using web_api.Data;
+using web_api.Service.FuncionarioService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IFuncionarioInterface, FuncionarioService>();
 
 var app = builder.Build();
 
